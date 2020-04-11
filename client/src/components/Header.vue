@@ -7,13 +7,19 @@
             <a href="/" class="navbar-brand">Lookey</a>
             <ul class="navbar-nav">
                 <li><router-link :to="{name:'homeLink'}" class="nav-link">HOME</router-link></li>
-                <li><router-link :to="{name:'menuLink'}" class="nav-link">MENU</router-link></li>
+                <li><router-link :to="{name:'menuLink'}" class="nav-link">CART</router-link></li>
                 <li><router-link :to="{name:'adminLink'}" class="nav-link">ADMIN</router-link></li>
                 <li><router-link :to="{name:'aboutLink'}" class="nav-link">ABOUT</router-link></li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li><router-link :to="{name:'loginLink'}" class="nav-link">LOGIN</router-link></li>
-                <li><router-link :to="{name:'signupLink'}" class="nav-link">SIGNUP</router-link></li>
+                <li><router-link :to="{name:'loginLink'}" v-show="!isLogin" class="nav-link">LOGIN</router-link></li>
+               
+                <li class="nav-link text-success"><strong>{{currentUser}}</strong></li>
+
+                <li><router-link :to="{name:'loginLink'}" v-show="isLogin" 
+                class="nav-link">[LOGOUT]</router-link></li>
+                              
+                <li><router-link :to="{name:'signupLink'}" v-show="!isLogin" class="nav-link">SIGNUP</router-link></li>
             </ul>
         </nav>
 
@@ -23,12 +29,24 @@
 </template>
 
 <script>
-// export default {
+export default {
 //     data(){
 //         // return{
 //         //     homelink:'/'
 //         //}
 //     }
 // }
+    computed:{
+        currentUser(){
+            return this.$store.getters.currentUser
+        },
+
+        isLogin(){
+            console.log(this.$store.getters.isLogin)
+            return this.$store.getters.isLogin
+        }
+    }
+
+}
 </script>
     

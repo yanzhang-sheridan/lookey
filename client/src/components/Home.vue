@@ -4,7 +4,7 @@
             <div class="background">
                 <h1>Welcome to Lookey</h1>
                 <h2>Shop your groceries now</h2>
-                <button @click="goToMenu" class="btn btn-success">Let's go</button>
+                <button @click="goToLogin" class="btn btn-success">Let's go</button>
              </div>
     
         </div>
@@ -15,13 +15,17 @@
 <script>
 export default {
     methods:{
-        goToMenu(){
+        goToLogin(){
         //     this.$router.go(-1) //back to last page
         // 
             // this.$router.replace('/menu')             //point to a link
             // this.$router.replace({name:'menuLink'})  //by name
             //this.$router.push('/menu'); //
-            this.$router.push({name:'menuLink'});
+           if (this.$store.getters.isLogin){
+                this.$router.push({name:'menuLink'});
+           }else{
+                 this.$router.push({name:'loginLink'});
+           }
         }
 
     }

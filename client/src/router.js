@@ -30,8 +30,23 @@ export const routes = [
     'delivery':DeliveryInfo,
     'history':History,
   }},
-  {path:'/menu',  name:'menuLink',component:Menu},
-  {path:'/admin', name:'adminLink',component:Admin},
+  {
+    path:'/menu',
+    name:'menuLink',
+    component:Menu,
+    meta:{
+      requireAuth:true
+    }
+  },
+
+  {
+    path:'/admin',
+    name:'adminLink',
+    component:Admin,
+    meta:{
+      requireAuth:true
+    }
+  },
   {
     path:'/about',
     name:'aboutLink',
