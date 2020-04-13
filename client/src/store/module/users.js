@@ -1,24 +1,34 @@
 const state = {
   currentUser: null,
-  isLogin:false
+  isLogin:false,
+  currentUserID:null
 }
 
 const getters = {
   currentUser: state => state.currentUser,
-  isLogin: state => state.isLogin
+  isLogin: state => state.isLogin,
+  currentUserID: state => state.currentUserID
 }
 
 const mutations = {
  
   userStatus(state,user){
     if(user){
-      state.currentUser = user
+      //state.currentUID = id
+     state.currentUser = user
       state.isLogin = true
-      //console.log(state.isLogin)
+      
+      //console.log(state.currentUID)
+      console.log(state.isLogin)
+
     }else{
-      state.currentUser = null
+      state.currentUser = null      
+      //state.currentUID = null
       state.isLogin = false
     }
+  },
+  userIDStatus(state, userID){
+    state.currentUserID = userID
   },
 
   loginStatus(state, status){
@@ -29,12 +39,17 @@ const mutations = {
 const actions = {
  
   setUser({commit},user){
-      //console.log(user);
+   // console.log(id);
     commit("userStatus",user)
   },
 
+  setUserID({commit},userID){
+    // console.log(id);
+     commit("userIDStatus",userID)
+   },
+
   setLogin({commit},status){
-    //console.log(status)
+    console.log(status)
     commit("loginStatus",status)
   }
 }

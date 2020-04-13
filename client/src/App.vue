@@ -4,17 +4,23 @@
       <app-header></app-header>
     </div>
     <div class="container">
-      <router-view></router-view>
+       <transition name="page" mode="out-in">
+          <router-view></router-view>
+       </transition>
     </div>
+    
     <div class="container">
-       <div class="row">
-         <div class="col-sm-12 col-md-4">
+       <div class="row  p-5">
+         <div class="col-sm-12 col-md-3">
            <router-view name='orderingGuide'></router-view>
          </div>
-         <div class="col-sm-12 col-md-4">
+         <div class="col-sm-12 col-md-3">
            <router-view name='delivery'></router-view>
          </div>
-          <div class="col-sm-12 col-md-4">
+          <div class="col-sm-12 col-md-3">
+           <router-view name='contact'></router-view>
+         </div>
+          <div class="col-sm-12 col-md-3 font-weight-bold">
            <router-view name='history'></router-view>
          </div>
        </div>
@@ -31,9 +37,20 @@
       appHeader:Header
       // "app-header" ok too
     }
+   
   }
 </script>
 
 
 <style>
+
+ .page-enter, .page-leave-active {
+    opacity: 0;
+    transform: translate(50px);
+    transform: scale(0);
+  }
+  .page-enter-active, .page-leave-active {
+    transition: all .5s;
+  }
+ 
 </style>

@@ -20,6 +20,13 @@ class Api extends CI_Controller {
             $this->JSON_DATA
         );
     }
+
+    public function saveBatch(){
+        echo $this->course_model->saveBatch(
+            $this->JSON_DATA
+        );
+    }
+
     public function update(){
         $id = $this->JSON_DATA["id"];
         unset($this->JSON_DATA["id"]);

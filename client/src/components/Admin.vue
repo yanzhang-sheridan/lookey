@@ -11,20 +11,34 @@
                         <th>Product</th>
                         <th>Brand</th>
                         <th>Size</th>
+                        <th>Price</th>
                         <th>DELETE</th>
-                        <th>MODIFY</th>
+                        <th>UPDATE</th>
                     </tr>
                 </thead>
-                <tbody v-for="item in getProductItems" :key = "item.id">
+                <tbody v-for="product in getProductItems" :key = "product.id">
                     <tr>
-                        <td>{{item.name}}</td>
-                        <td>{{item.brand}}</td>
-                        <td>{{item.size}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.brand}}</td>
+                        <td>{{product.size}}</td>
+                        <td>{{product.price}}</td>
                         <td>
-                            <button @click="deleteData(item)" class="btn btn-outline-danger btn-sm">&times;</button>
+                            <button @click="deleteData(product)" class="btn btn-outline-danger btn-sm">&times;</button>
                         </td>
                         <td>
-                            <button @click="ModifyData(item)" class="btn btn-outline-danger btn-sm">m</button>
+                            <router-link
+                                :to="{ name : 'update-productAdmin', params : { product : product}}"
+                                tag="button"
+                                class="btn btn-sm btn btn-outline-warning">
+                                go
+                            </router-link>
+                             <!-- <router-link
+                                :to="{ name : 'update-itemparam', params : {product : product}}"
+                                tag="button"
+                                class="btn btn-sm btn btn-outline-warning">
+                                go
+                            </router-link> -->
+                             <!-- <button @click="ModifyData(product)" class="btn btn-outline-warning btn-sm">go</button> -->
                         </td>
                     </tr>
                 </tbody>
@@ -38,9 +52,10 @@
     import NewProduct from './NewProduct.vue'
     // import axios from 'axios'
     export default {
+        props : ["product"],
         data(){
             return{
-                // getProductItems:[]
+                productItems:[]
             }
         },
         components:{
@@ -51,7 +66,7 @@
             getProductItems:{
 
                 get(){         
-                   //console.log(this.$store.state.productItems)   
+                   console.log(this.$store.state.productItems)   
                    // return this.$store.state.productItems
                     return this.$store.getters.getProductItems
 
@@ -76,7 +91,7 @@
                     //    data[key].id = key
                        productArray.push(data[key])
                     }
-                    // this.getProductItems = productArray
+                    this.productItems = productArray
                    //console.log(productArray)
                     //sychronize the data
                   // this.$store.commit = ('setProductItems',productArray)
@@ -85,14 +100,24 @@
       
         methods:{
             deleteData(item){
-               // console.log(item.id)
+                console.log(item.id)
                 //axios.post
                 this.http.post("productapi/delete", JSON.stringify({ id : item.id}))
                     .then(res => { 
                         console.log(item.id);
                         this.$store.commit('removeProductItems',item.id)
                      })
-            }
+            },
+        //    ModifyData(item){
+        //        console.log(item.id)
+        //        this.$router.push({ name : 'update-itemparam', params : {product : item}})
+        //         //axios.post
+        //         // this.http.post("productapi/delete", JSON.stringify({ id : item.id}))
+        //         //     .then(res => { 
+        //         //         console.log(item.id);
+        //         //         this.$store.commit('removeProductItems',item.id)
+        //         //      })
+        //     }
         }
     }
   

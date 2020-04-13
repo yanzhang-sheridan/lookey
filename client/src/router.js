@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 
 import Home from './components/Home'
 import Menu from './components/Menu'
+import Manage from './components/Manage'
 import Admin from './components/Admin'
 import About from './components/about/About'
 import Login from './components/Login'
@@ -13,10 +14,23 @@ import Contact from './components/about/Contact'
 import DeliveryInfo from './components/about/DeliveryInfo'
 import History from './components/about/History'
 import OrderingGuide from './components/about/OrderingGuide'
+import UpdateOrder from "./components/manage/UpdateOrder"
+import UpdateProduct from "./components/admin/UpdateProduct"
 
 //level 3
 import Phone from './components/about/contact/Phone'
 import PersonName from './components/about/contact/PersonName'
+
+
+//testing
+import Courses from "./components/ListCourse/Courses"
+import NewCourse from "./components/NewCourse"
+import UpdateCourse from "./components/UpdateCourse"
+
+import ProductsAdmin from "./components/ListProduct/ProductsAdmin"
+import NewProductAdmin from "./components/NewProductAdmin"
+import UpdateProductAdmin from "./components/UpdateProductAdmin"
+
 
 
 
@@ -28,6 +42,7 @@ export const routes = [
     default:Home,
     'orderingGuide':OrderingGuide,
     'delivery':DeliveryInfo,
+    'contact':Contact,
     'history':History,
   }},
   {
@@ -38,6 +53,17 @@ export const routes = [
       requireAuth:true
     }
   },
+  {
+    path:'/manage',
+    name:'manageLink',
+    component:Manage,
+    meta:{
+      requireAuth:true
+    },
+    children:[
+      { name : "update-parametre",  path : "/updateOrder", component : UpdateOrder},
+    ]
+  },
 
   {
     path:'/admin',
@@ -45,8 +71,12 @@ export const routes = [
     component:Admin,
     meta:{
       requireAuth:true
-    }
+    },
+    children:[
+      { name : "update-itemparam",  path : "/updateProduct", component : UpdateProduct},
+    ]   
   },
+  
   {
     path:'/about',
     name:'aboutLink',
@@ -71,6 +101,32 @@ export const routes = [
 
    ]
   },
+
+  { 
+    path : "/courses",
+      name:'courseLink',
+      component : Courses,
+      meta:{
+        requireAuth:true
+      }
+  },
+  
+  { path : "/New",  name:'newCourseLink', component : NewCourse},
+  { name : "update-course", path : "/Update", component : UpdateCourse},
+
+  { 
+    path : "/productsAdmin",
+    name:'productAdminLink',
+    component : ProductsAdmin,
+    meta:{
+      requireAuth:true
+    },
+  },
+  
+  { path : "/NewProductAdmin",  name:'newProductAdminLink', component : NewProductAdmin},
+  { name : "update-productAdmin", path : "/UpdateProductAdmin", component : UpdateProductAdmin},
+ 
+ 
   {path:'/login', name:"loginLink",component:Login},
   {path:'/signup',  name:"signupLink",component:Register},
   {path:'/*', redirect:'/'}

@@ -4,9 +4,10 @@
       <table v-if="courses.length > 0" class="table table-hover table-dark table-striped border-dark border shadow-lg">
         <thead>
         <th>#id</th>
-        <th>Course Title</th>
-        <th>Course Coupon</th>
-        <th>Course Price</th>
+        <th>Product</th>
+        <th>Order Status</th>
+        <th>Quantity</th>
+        <th>Order Date</th>
         <th></th>
         </thead>
         <tbody>
@@ -14,14 +15,14 @@
         </tbody>
       </table>
       <div v-else class="alert alert-primary border-0">
-        No courses found.
+        No orders found.
       </div>
-      <router-link
+      <!-- <router-link
         to="/New"
         tag="button"
         class="btn-dark btn text-info float-right">
         ADD NEW
-      </router-link>
+      </router-link> -->
     </div>
   </div>
 </template>
@@ -32,8 +33,12 @@
     components : {
       Course
     },
+   created(){
+     this.$store.dispatch("initApp")
+   },
     computed : {
       courses(){
+        console.log(this.$store.getters.getCourses)
         return this.$store.getters.getCourses
       }
     }

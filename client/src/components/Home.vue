@@ -3,8 +3,8 @@
         <div id="home" class="col-sm-12 text-center">
             <div class="background">
                 <h1>Welcome to Lookey</h1>
-                <h2>Shop your groceries now</h2>
-                <button @click="goToLogin" class="btn btn-success">Let's go</button>
+                <h2>Shop your products now</h2>
+                <button @click="goToLogin" class="btn btn-success">Let's Go</button>
              </div>
     
         </div>
@@ -33,7 +33,7 @@ export default {
 </script>
 <style>
     #home{
-        background: url('../assets/shopping.jpg');
+        background: url('../assets/shopping.png');
         height:85vh;
         padding:10%;
     }

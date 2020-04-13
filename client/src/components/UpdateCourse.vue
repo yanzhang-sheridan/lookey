@@ -3,17 +3,21 @@
     <div class="col-md-6 offset-3">
       <form @submit.prevent="onSubmit" class="card mt-5 p-3 border border-dark bg-dark shadow-lg">
         <div class="form-group">
-          <label class="text-light">Title</label>
-          <input v-model="course.title" type="text" class="bg-dark border border-info text-info form-control" placeholder="Kursun adını giriniz...">
+          <label class="text-light">Product Name</label>
+          <input v-model="course.name" type="text" class="bg-dark border border-info text-info form-control" placeholder="please enter product name...">
         </div>
         <div class="form-group">
-          <label class="text-light">Coupon Code</label>
-          <input v-model="course.couponCode" type="text" class="bg-dark border border-success text-success form-control" placeholder="Kupon kodunu giriniz...">
+          <label class="text-light">Order Status</label>
+          <input v-model="course.status" type="text" class="bg-dark border border-success text-success form-control" placeholder="please enter the quantity...">
         </div>
         <div class="form-group">
-          <label class="text-light">Price</label>
-          <input v-model="course.price" type="text" class="bg-dark border border-warning text-warning form-control" placeholder="Kursun ücretini giriniz...">
+          <label class="text-light">Quantity</label>
+          <input v-model="course.quantity" type="text" class="bg-dark border border-warning text-warning form-control" placeholder="please enter the total price...">
         </div>
+        <!-- <div class="form-group">
+          <label class="text-light">Order Date</label>
+          <input v-model="course.quantity" type="text" class="bg-dark border border-warning text-warning form-control" placeholder="please enter the total price...">
+        </div> -->
         <div class="button-container">
           <router-link
             to="/"
@@ -32,17 +36,18 @@
     data(){
       return {
         course : {
-          title : '',
-          couponCode : '',
-          price : 0.0
+          name : '',
+          status : '',
+          quantity : 0.0
         }
       }
     },
     methods : {
       onSubmit(){
+        console.log(this.course)
         this.$store.dispatch("updateCourse", this.course)
           .then(() => {
-            this.$router.push("/")
+            this.$router.push({name:'courseLink'})
           })
       }
     },
