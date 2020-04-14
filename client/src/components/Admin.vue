@@ -1,9 +1,9 @@
 <template>
     <div class="row">
-        <div class="col-sm-12 col-md-7">
+        <div class="col-sm-12 col-md-8">
             <app-new-product></app-new-product>
         </div>
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-md-4">
             <h3 class="text-muted my-5">Products</h3>
             <table class="table">
                 <thead class="table table-default">

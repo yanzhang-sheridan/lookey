@@ -5,18 +5,7 @@
 
           <div class="row">
             <div class="col-lg-8" style="margin:20px">
-                <!-- <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default align-left" type="button"><span class="text-success font-weight-bold">SEARCH</span></button>
-                    </span>
-                    <input type="text" v-model="searchText" class="form-control" placeholder="Search for...">
-                </div> -->
-          
-                <!-- <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text"  v-model="searchText" class="form-control" placeholder="Search">
-                </div> -->
-                <div class="input-group">
+               <div class="input-group">
                     <input class="form-control py-2" v-model="searchText"  type="search" value="search" id="example-search-input">
                     <span class="input-group-append">
                         <button class="btn btn-outline-success" type="button">
@@ -28,22 +17,17 @@
              </div>
           </div>
 
-
-      
-
-
-
            <div class="row">
                  
-                        <div class="col-md-4 col-sm-6" v-for="item in searchResult" :key="item.id">
+                        <div class="col-md-3 col-sm-6" v-for="item in searchResult" :key="item.id">
                             <!-- <a class="portfolio-link" data-toggle="modal" :href="obj.link"> -->
                                 
-                            <!-- <img class="img-fluid" :src="obj.img" alt=""> -->
-                                    
+                            <img class="img-fluid" :src="imgPath+item.image"   alt=""/>
+                                  
                             <div>
-                                <p font-weight-bold>{{item.brand}} {{item.name}} {{item.size}}</p>
-                                <p class="text-muted">{{item.price}}</p>
-                                <p class="text-danger">{{item.promotion}}</p>
+                                <p class="font-weight-bold">{{item.brand}} {{item.name}} {{item.size}}</p>
+                                <p class="text-info mr-1">{{'$'+item.price}} <span class="text-danger">{{item.promotion}}</span></p>
+                                <!-- <p class="text-danger">{{item.promotion}}</p> -->
                                 <button @click="addToBasket(item)" class="btn sm btn-outline-success">+</button>
                             </div>
                         </div>
@@ -99,7 +83,8 @@ export default {
             baskets:[],
             basketText:"The cart is empty",
             searchText:'',
-            productItems:[]
+            productItems:[],
+            imgPath: '../../static/image/products/'
             // getProductItems:{}
         }
     },
@@ -128,23 +113,33 @@ export default {
             // console.log(this.info)
                 return this.productItems.filter(
                     item =>
-                    item.name.indexOf(this.searchText) > -1 
+                    item.name.indexOf(this.searchText) > -1 ||
+                            item.category.indexOf(this.searchText) > -1
                 );
             } else {
                 return this.productItems
             }
-        }
-
+        } 
+       
+     
     },
+       
     created(){
         this.fetchData()
     },
+
     methods:{
        
         formatPrice(value) {
             let val = (value/1).toFixed(2).replace('.', ',')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         }, 
+
+         getImage(img){
+              
+            return(this.imgPath+img)
+        },
+
 
         fetchData(){
             //   axios.get("productapi/get_all_data")
@@ -227,8 +222,7 @@ export default {
                         productid: this.baskets[key].id,
                         name: this.baskets[key].name,
                         quantity:  this.baskets[key].quantity,
-                        status: 'processing'
-                        }
+                        status: 'processing'}
                     //    data[key].id = key
                         orderArray.push(data)
                 }
@@ -236,7 +230,7 @@ export default {
 
                     console.log(JSON.stringify(orderArray))
               
-                    this.http.post("orderapi/saveBatch", JSON.stringify(orderArray))
+                    this.http.post("orderapi/saveBatch",JSON.stringify(orderArray))
                       .then(res => {
                                           console.log(res.data)
                                           alert("Thanks for your order!")

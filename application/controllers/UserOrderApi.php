@@ -21,9 +21,13 @@ class Userorderapi extends CI_Controller {
         );
     }
     public function saveBatch(){
-        echo $this->userorder_model->saveBatch(
-            $this->JSON_DATA
-        );
+        $this->userorder_model->saveBatch(
+            $this->JSON_DATA);
+        echo true; //$this->JSON_DATA;
+        // var_dump($this->JSON_DATA);die();
+        // echo('hello');
+       // var_dump()
+       //  );
     }
     public function update(){
         $id = $this->JSON_DATA["id"];

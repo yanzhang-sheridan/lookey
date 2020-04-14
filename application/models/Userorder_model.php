@@ -21,12 +21,15 @@ class Userorder_model extends CI_Model{
         }
     }
     public function saveBatch($data = array()){
-        $insert = $this->db->insert_batch($this->tableName, $data);
-        if($insert){
-            return json_encode(array(
-               "insert_id" => $this->db->insert_id()
-            ));
-        }
+         
+         $this->db->insert_batch($this->tableName, $data);
+         return($data);  
+        // $insert = ;
+        // if($insert){
+        //     return json_encode(array(
+        //        "insert_id" => $this->db->insert_id()
+        //     ));
+        // }
         // var_dump($data);die;
     }
 

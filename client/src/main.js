@@ -8,19 +8,20 @@ import moment from 'moment'
 
 
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(fas)
-library.add(fab)
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import { fas } from '@fortawesome/free-solid-svg-icons'
+// import { fab } from '@fortawesome/free-brands-svg-icons'
 
-// library.add(faCoffee)
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+// library.add(fas)
+// library.add(fab)
+
+// // library.add(faCoffee)
+
+// Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
 

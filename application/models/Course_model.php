@@ -36,11 +36,12 @@ class Course_model extends CI_Model{
 
    public function saveBatch($data = array()){
         $insert = $this->db->insert_batch($this->tableName, $data);
-        if($insert){
-            return json_encode(array(
-               "insert_id" => $this->db->insert_id()
-            ));
-        }
+        // if($insert){
+        //     return json_encode(array(
+        //        "insert_id" => $this->db->insert_id()
+        //     ));
+        // }
+        return($insert);
     }
 
 
